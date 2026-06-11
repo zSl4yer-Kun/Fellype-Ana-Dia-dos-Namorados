@@ -217,18 +217,23 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* GALERIA DE FOTOS */
+/* ============================================================
+   NOVA ESTRUTURA DA GALERIA (3 FOTOS 4:5 EM CIMA + 1 VERTICAL EMBAIXO)
+   ============================================================ */
+
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(6, 1fr); /* 6 colunas invisíveis para o alinhamento de mesa */
+    gap: 1.5rem;
 }
 
+/* As 3 primeiras fotos (Agora no formato 4:5 - Retrato Moderno) */
 .gallery-item {
+    grid-column: span 2; /* Cada uma ocupa 2 colunas (2 + 2 + 2 = 6, fechando a linha) */
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid rgba(212, 175, 55, 0.2);
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 5; /* Alterado para 4:5 para valorizar as fotos de vocês */
 }
 
 .gallery-item img {
@@ -240,6 +245,15 @@ body {
 
 .gallery-item img:hover {
     transform: scale(1.05);
+}
+
+/* A 4ª foto (Especial Vertical 3:4 centralizada abaixo) */
+.gallery-item.vertical {
+    grid-column: 2 / span 4; /* Fica centralizada no meio da linha de baixo */
+    aspect-ratio: 3 / 4; /* Formato clássico de retrato */
+    max-width: 320px; /* Evita que ela cresça demais em telas muito grandes */
+    margin: 0 auto; /* Alinhamento central */
+    width: 100%;
 }
 
 /* PLAYERS SIMBÓLICO */
@@ -319,10 +333,40 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVIDADE PARA CELULAR */
+/* ============================================================
+   RESPONSIVIDADE PARA CELULAR (ORGANIZAÇÃO EM GRIDE ELEGANTE)
+   ============================================================ */
 @media (max-width: 768px) {
     .romantic-title { font-size: 3.2rem; }
     h2 { font-size: 2.2rem; }
-    .gallery-grid { grid-template-columns: 1fr; }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* Divide a tela do celular em 2 colunas */
+        gap: 1rem;
+    }
+    
+    .gallery-item {
+        grid-column: span 1; /* Foto 1 e Foto 2 ficam lado a lado em formato 4:5 */
+        aspect-ratio: 4 / 5;
+    }
+    
+    /* Foto 3 quebra a linha e fica centralizada sozinha */
+    .gallery-item:nth-child(3) {
+        grid-column: 1 / span 2;
+        max-width: 240px; /* Mantém o mesmo tamanho padrão das outras para não esticar */
+        margin: 0 auto;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+    }
+    
+    /* Foto 4 (vertical) fecha a galeria centralizada na última linha */
+    .gallery-item.vertical {
+        grid-column: 1 / span 2;
+        max-width: 240px;
+        margin: 0 auto;
+        width: 100%;
+        aspect-ratio: 3 / 4; /* Mantém a proporção dela */
+    }
+    
     .counter-box { min-width: 45%; }
 }
