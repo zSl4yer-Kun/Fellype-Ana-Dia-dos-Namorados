@@ -31,10 +31,10 @@ updateCounter(); // Executa uma vez imediatamente
    ============================================================ */
 const listaDeFotosVoadoras = [
     'foto-principal.jpeg', // Exemplo 1
-    'galeria1.jpeg',       // Exemplo 2
+    'galeria1.png',       // Exemplo 2
     'galeria2.jpeg',       // Exemplo 3
     'galeria3.jpeg',       // Adicione quantas quiser, separadas por vírgula e entre aspas
-    'galeria4.png'
+    'galeria4.jpeg'
 ];
 
 
