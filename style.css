@@ -5,48 +5,93 @@
     box-sizing: border-box;
 }
 
+/* ALTERE OU ADICIONE ESSES BLOCOS NO SEU STYLE.CSS */
+
 body {
-    background-color: #121212; /* Fundo escuro moderno */
+    /* Gradiente radial que simula uma iluminação de estúdio no centro */
+    background: radial-gradient(circle at center, #1a0b0e 0%, #0a0a0b 100%);
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     line-height: 1.6;
+    background-attachment: fixed; /* Mantém o efeito de luz parado enquanto rola */
 }
 
-h2 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.8rem;
-    color: #d4af37; /* Dourado */
-    text-align: center;
-    margin-bottom: 2rem;
+/* ATUALIZAÇÃO DOS CARTÕES PARA EFEITO DE VIDRO (GLASSMORPHISM) */
+.counter-section, .letter-card, .player-placeholder {
+    background: rgba(22, 22, 26, 0.65) !important;
+    backdrop-filter: blur(12px); /* Desfoca o fundo, parecendo vidro fosco */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.15) !important; /* Borda dourada ultra fina */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 
+                0 0 30px rgba(212, 175, 55, 0.03); /* Brilho dourado oculto */
 }
 
-section {
-    padding: 5rem 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
+/* DETALHE EXTRA PARA A CARTA FICAR MAIS ELEGANTE */
+.letter-card {
+    background: linear-gradient(135deg, rgba(31, 21, 23, 0.8) 0%, rgba(15, 15, 18, 0.8) 100%) !important;
 }
 
-/* CORAÇÕES FLUTUANTES */
+/* --- ATUALIZAÇÃO DO STYLE.CSS PARA FOTOS VOADORAS --- */
+
+/* Contêiner principal - mantém igual */
 #hearts-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none;
-    z-index: 999;
+    pointer-events: none; /* Deixa clicar no conteúdo atrás */
+    z-index: 10; /* Fica acima do fundo, mas abaixo dos textos principais (mudei z-index) */
+    overflow: hidden;
 }
 
+/* A Foto Voadora (O Coração) */
 .heart {
     position: absolute;
-    bottom: -20px;
-    color: #ff4d6d; /* Vermelho suave */
-    font-size: 1.5rem;
-    opacity: 0.8;
-    animation: floatUp linear infinite;
+    bottom: -100px; /* Começa um pouco abaixo da tela */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* MÁSCARA DE CORAÇÃO PERFEITA (CSS Avançado) */
+    /* Usamos um SVG embutido como máscara */
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.9-207.9z"/></svg>');
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.9-207.9z"/></svg>');
+    
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    /* Sombra dourada suave para destacar do fundo */
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+    
+    opacity: 0; /* Começa invisível e aparece na animação */
+    animation: floatAndRotate linear infinite;
+    will-change: transform, opacity; /* Otimização de performance */
 }
 
+/* Nova animação: Sobe, Gira e Desaparece */
+@keyframes floatAndRotate {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7; /* Aparece rápido */
+    }
+    80% {
+        opacity: 0.7; /* Mantém visível */
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1); /* Sobe tudo, gira 360º */
+        opacity: 0; /* Desaparece no topo */
+    }
+}
+}
 @keyframes floatUp {
     0% {
         transform: translateY(0) scale(1);
@@ -280,100 +325,4 @@ section {
     h2 { font-size: 2.2rem; }
     .gallery-grid { grid-template-columns: 1fr; }
     .counter-box { min-width: 45%; }
-}
-/* ALTERE OU ADICIONE ESSES BLOCOS NO SEU STYLE.CSS */
-
-body {
-    /* Gradiente radial que simula uma iluminação de estúdio no centro */
-    background: radial-gradient(circle at center, #1a0b0e 0%, #0a0a0b 100%);
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
-    line-height: 1.6;
-    background-attachment: fixed; /* Mantém o efeito de luz parado enquanto rola */
-}
-
-/* ATUALIZAÇÃO DOS CARTÕES PARA EFEITO DE VIDRO (GLASSMORPHISM) */
-.counter-section, .letter-card, .player-placeholder {
-    background: rgba(22, 22, 26, 0.65) !important;
-    backdrop-filter: blur(12px); /* Desfoca o fundo, parecendo vidro fosco */
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.15) !important; /* Borda dourada ultra fina */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 
-                0 0 30px rgba(212, 175, 55, 0.03); /* Brilho dourado oculto */
-}
-
-/* DETALHE EXTRA PARA A CARTA FICAR MAIS ELEGANTE */
-.letter-card {
-    background: linear-gradient(135deg, rgba(31, 21, 23, 0.8) 0%, rgba(15, 15, 18, 0.8) 100%) !important;
-}
-
-/* SUAVIZAÇÃO DOS CORAÇÕES PARA COMBINAR COM O FUNDO CHIQUE */
-.heart {
-    position: absolute;
-    bottom: -20px;
-    color: #ff4d6d;
-    font-size: 1.5rem;
-    filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.5)); /* Leve brilho nos corações */
-    opacity: 0.6;
-    animation: floatUp linear infinite;
-}
-/* --- ATUALIZAÇÃO DO STYLE.CSS PARA FOTOS VOADORAS --- */
-
-/* Contêiner principal - mantém igual */
-#hearts-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none; /* Deixa clicar no conteúdo atrás */
-    z-index: 10; /* Fica acima do fundo, mas abaixo dos textos principais (mudei z-index) */
-    overflow: hidden;
-}
-
-/* A Foto Voadora (O Coração) */
-.heart {
-    position: absolute;
-    bottom: -100px; /* Começa um pouco abaixo da tela */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    /* MÁSCARA DE CORAÇÃO PERFEITA (CSS Avançado) */
-    /* Usamos um SVG embutido como máscara */
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.9-207.9z"/></svg>');
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.9-207.9z"/></svg>');
-    
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-
-    /* Sombra dourada suave para destacar do fundo */
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-    
-    opacity: 0; /* Começa invisível e aparece na animação */
-    animation: floatAndRotate linear infinite;
-    will-change: transform, opacity; /* Otimização de performance */
-}
-
-/* Nova animação: Sobe, Gira e Desaparece */
-@keyframes floatAndRotate {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(0.8);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.7; /* Aparece rápido */
-    }
-    80% {
-        opacity: 0.7; /* Mantém visível */
-    }
-    100% {
-        transform: translateY(-110vh) rotate(360deg) scale(1); /* Sobe tudo, gira 360º */
-        opacity: 0; /* Desaparece no topo */
-    }
 }
