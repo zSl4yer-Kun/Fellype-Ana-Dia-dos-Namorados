@@ -218,22 +218,22 @@ body {
 }
 
 /* ============================================================
-   NOVA ESTRUTURA DA GALERIA (3 FOTOS 4:5 EM CIMA + 1 VERTICAL EMBAIXO)
+   ESTRUTURA DA GALERIA ATUALIZADA (3 FOTOS 4:5 + 1 HORIZONTAL EMBAIXO)
    ============================================================ */
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 colunas invisíveis para o alinhamento de mesa */
+    grid-template-columns: repeat(6, 1fr);
     gap: 1.5rem;
 }
 
-/* As 3 primeiras fotos (Agora no formato 4:5 - Retrato Moderno) */
+/* As 3 primeiras fotos em formato 4:5 (em pé) */
 .gallery-item {
-    grid-column: span 2; /* Cada uma ocupa 2 colunas (2 + 2 + 2 = 6, fechando a linha) */
+    grid-column: span 2;
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid rgba(212, 175, 55, 0.2);
-    aspect-ratio: 4 / 5; /* Alterado para 4:5 para valorizar as fotos de vocês */
+    aspect-ratio: 4 / 5; 
 }
 
 .gallery-item img {
@@ -247,15 +247,14 @@ body {
     transform: scale(1.05);
 }
 
-/* A 4ª foto (Especial Vertical 3:4 centralizada abaixo) */
-.gallery-item.vertical {
-    grid-column: 2 / span 4; /* Fica centralizada no meio da linha de baixo */
-    aspect-ratio: 3 / 4; /* Formato clássico de retrato */
-    max-width: 320px; /* Evita que ela cresça demais em telas muito grandes */
-    margin: 0 auto; /* Alinhamento central */
+/* A 4ª foto (Agora deitada na horizontal e centralizada) */
+.gallery-item.horizontal {
+    grid-column: 2 / span 4; /* Mantém centralizada no meio da tela */
+    aspect-ratio: 4 / 3; /* Proporção deitada perfeita para a foto de vocês */
+    max-width: 420px; /* Largura ideal para não esticar demais */
+    margin: 0 auto;
     width: 100%;
 }
-
 /* PLAYERS SIMBÓLICO */
 .player-placeholder {
     background: #1f1f1f;
@@ -334,38 +333,38 @@ body {
 }
 
 /* ============================================================
-   RESPONSIVIDADE PARA CELULAR (ORGANIZAÇÃO EM GRIDE ELEGANTE)
+   RESPONSIVIDADE PARA CELULAR
    ============================================================ */
 @media (max-width: 768px) {
     .romantic-title { font-size: 3.2rem; }
     h2 { font-size: 2.2rem; }
     
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr); /* Divide a tela do celular em 2 colunas */
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
     
     .gallery-item {
-        grid-column: span 1; /* Foto 1 e Foto 2 ficam lado a lado em formato 4:5 */
+        grid-column: span 1;
         aspect-ratio: 4 / 5;
     }
     
-    /* Foto 3 quebra a linha e fica centralizada sozinha */
+    /* Foto 3 se organiza centralizada */
     .gallery-item:nth-child(3) {
-        grid-column: 1 / span 2;
-        max-width: 240px; /* Mantém o mesmo tamanho padrão das outras para não esticar */
-        margin: 0 auto;
-        width: 100%;
-        aspect-ratio: 4 / 5;
-    }
-    
-    /* Foto 4 (vertical) fecha a galeria centralizada na última linha */
-    .gallery-item.vertical {
         grid-column: 1 / span 2;
         max-width: 240px;
         margin: 0 auto;
         width: 100%;
-        aspect-ratio: 3 / 4; /* Mantém a proporção dela */
+        aspect-ratio: 4 / 5;
+    }
+    
+    /* Foto 4 deitada no celular ocupando a largura ideal */
+    .gallery-item.horizontal {
+        grid-column: 1 / span 2;
+        max-width: 280px; /* Ajuste milimétrico para a tela do celular */
+        margin: 0 auto;
+        width: 100%;
+        aspect-ratio: 4 / 3; /* Garante que ela continue deitada no celular */
     }
     
     .counter-box { min-width: 45%; }
