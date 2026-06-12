@@ -8,25 +8,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- PLAYER DE MÚSICA ATUALIZADO E FORÇADO -->
-    <audio id="background-music" loop preload="auto">
-        <source src="ilove.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
+<!-- PLAYER DE MÚSICA ULTRA COMPATÍVEL -->
+    <audio id="background-music" loop preload="auto" crossorigin="anonymous">
+        <source src="./ilove.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
     </audio>
-    <!-- Botão Flutuante Discreto para Controle (Opcional, mas recomendado) -->
-    <div class="music-controls" onclick="toggleMusic()">
+
+    <!-- Botão Flutuante Discreto -->
+    <div class="music-controls" onclick="forcePlayMusic()">
         <span id="music-icon">🎵</span>
     </div>
 
     <script>
-        function toggleMusic() {
-            const music = document.getElementById('background-music');
-            const icon = document.getElementById('music-icon');
-            
+        const music = document.getElementById('background-music');
+        const icon = document.getElementById('music-icon');
+
+        // Garante que o volume está alto
+        music.volume = 1.0;
+
+        function forcePlayMusic() {
             if (music.paused) {
-                music.play();
-                icon.innerText = "🎵";
-                icon.style.animation = "pulse 1.5s infinite";
+                music.play()
+                    .then(() => {
+                        icon.innerText = "🎵";
+                        icon.style.animation = "pulse 1.5s infinite";
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao tocar:", error);
+                        alert("Clique novamente para liberar o som! O navegador bloqueou o início automático.");
+                    });
             } else {
                 music.pause();
                 icon.innerText = "🔇";
@@ -34,13 +44,31 @@
             }
         }
 
-        // Tenta iniciar a música assim que houver qualquer clique na página (Regra dos Navegadores)
-        document.addEventListener('click', function() {
-            const music = document.getElementById('background-music');
+        // Tenta destravar o som em QUALQUER toque que ela der na página
+        function destravarSom() {
             if (music.paused) {
-                music.play().catch(error => console.log("Autoplay bloqueado aguardando interação."));
+                music.play()
+                    .then(() => {
+                        icon.innerText = "🎵";
+                        icon.style.animation = "pulse 1.5s infinite";
+                        // Remove os ouvintes para não ficar tentando tocar toda hora
+                        removerOuvintes();
+                    })
+                    .catch(err => console.log("Aguardando interação real..."));
             }
-        }, { once: true });
+        }
+
+        // Adiciona múltiplos gatilhos de toque para garantir que o celular capture o clique
+        document.addEventListener('click', destravarSom);
+        document.addEventListener('touchstart', destravarSom);
+        document.addEventListener('scroll', destravarSom);
+
+        function removerOuvintes() {
+            document.removeEventListener('click', destravarSom);
+            document.removeEventListener('touchstart', destravarSom);
+            document.removeEventListener('scroll', destravarSom);
+        }
+    </script>
     </script>
     <div id="hearts-container"></div>
 
