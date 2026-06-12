@@ -34,7 +34,8 @@ const listaDeFotosVoadoras = [
     'galeria1.png',       // Exemplo 2
     'galeria2.jpeg',       // Exemplo 3
     'galeria3.jpeg',       // Adicione quantas quiser, separadas por vírgula e entre aspas
-    'galeria4.jpeg'
+    'galeria4.jpeg',
+    'galeria7.png',
 ];
 
 
