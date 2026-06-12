@@ -8,13 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- PLAYER DE MÚSICA DE FUNDO EM LOOPING -->
-    <audio id="background-music" autoplay loop>
-        <source src="suamusica.mp3" type="audio/mp4">
+<!-- PLAYER DE MÚSICA ATUALIZADO E FORÇADO -->
+    <audio id="background-music" loop preload="auto">
         <source src="suamusica.mp3" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
-
     <!-- Botão Flutuante Discreto para Controle (Opcional, mas recomendado) -->
     <div class="music-controls" onclick="toggleMusic()">
         <span id="music-icon">🎵</span>
