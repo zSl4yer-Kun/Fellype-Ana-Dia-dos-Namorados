@@ -588,3 +588,43 @@ body {
         margin-bottom: 2rem;
     }
 }
+
+/* ============================================================
+   CONTROLE FLUTUANTE DA MÚSICA DE FUNDO (PREMIUM)
+   ============================================================ */
+.music-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background: rgba(22, 22, 26, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #d4af37; /* Borda Dourada */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999; /* Garante que fica por cima de tudo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.music-controls:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+#music-icon {
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+/* Mantém o ícone pulsando de forma sutil enquanto a música toca */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
