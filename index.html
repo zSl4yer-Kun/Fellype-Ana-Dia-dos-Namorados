@@ -8,7 +8,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- PLAYER DE MÚSICA DE FUNDO EM LOOPING -->
+    <audio id="background-music" autoplay loop>
+        <source src="suamusica.mp3" type="audio/mp4">
+        <source src="suamusica.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
+    <!-- Botão Flutuante Discreto para Controle (Opcional, mas recomendado) -->
+    <div class="music-controls" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span>
+    </div>
+
+    <script>
+        function toggleMusic() {
+            const music = document.getElementById('background-music');
+            const icon = document.getElementById('music-icon');
+            
+            if (music.paused) {
+                music.play();
+                icon.innerText = "🎵";
+                icon.style.animation = "pulse 1.5s infinite";
+            } else {
+                music.pause();
+                icon.innerText = "🔇";
+                icon.style.animation = "none";
+            }
+        }
+
+        // Tenta iniciar a música assim que houver qualquer clique na página (Regra dos Navegadores)
+        document.addEventListener('click', function() {
+            const music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play().catch(error => console.log("Autoplay bloqueado aguardando interação."));
+            }
+        }, { once: true });
+    </script>
     <div id="hearts-container"></div>
 
     <header class="hero-section">
