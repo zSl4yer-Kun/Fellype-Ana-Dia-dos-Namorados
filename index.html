@@ -39,50 +39,84 @@
         </div>
     </section>
 
-    <section class="timeline-section">
-        <h2>Nossa Linha do Tempo</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">Início</div>
-                <div class="timeline-content">
-                    <h3>O Encontro</h3>
-                    <p>Nos conhecemos no grupo de jovens da igreja. O começo de tudo.</p>
+    <section class="future-machine-section">
+        <h2>Gerador do Nosso Amanhã ⚡</h2>
+        <p class="section-subtitle">Clique no botão para projetar o que o futuro nos reserva.</p>
+        
+        <div class="machine-container">
+            <div class="machine-display">
+                <div class="slot-box">
+                    <span class="slot-label">ONDE</span>
+                    <div class="slot-window" id="slot-onde">🏡 No nosso lar</div>
+                </div>
+                
+                <div class="slot-box">
+                    <span class="slot-label">O QUE</span>
+                    <div class="slot-window" id="slot-oque">🏆 Conquistando metas</div>
+                </div>
+                
+                <div class="slot-box">
+                    <span class="slot-label">COMO</span>
+                    <div class="slot-window" id="slot-como">🔐 Sempre juntos</div>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">O Pedido</div>
-                <div class="timeline-content">
-                    <h3>A Declaração</h3>
-                    <p>Aquele momento inesquecível na calçada onde abri meu coração.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">O Beijo</div>
-                <div class="timeline-content">
-                    <h3>Primeiro Beijo</h3>
-                    <p>O instante em que tivemos a certeza de que fomos feitos um para o outro.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">08/02/2025</div>
-                <div class="timeline-content">
-                    <h3>O Início do Namoro</h3>
-                    <p>O "Sim" oficial que transformou nossas vidas em uma só jornada.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">08/02/2026</div>
-                <div class="timeline-content">
-                    <h3>1 Ano de Namoro</h3>
-                    <p>A celebração de 365 dias de muito amor, aprendizado e cumplicidade.</p>
-                </div>
+            
+            <button class="spin-button" onclick="spinMachine()">Construir Nosso Futuro</button>
+            
+            <div class="machine-message" id="machine-msg">
+                Pronta para ver o próximo capítulo? Dê o play acima!
             </div>
         </div>
+    </section>
+
+    <script>
+        const opcoesOnde = ["🏡 No nosso próprio lar", "✈️ Em uma viagem internacional", "🌴 Em um destino paradisíaco", "💼 No topo do sucesso", "🚗 Conquistando nossa liberdade"];
+        const opcoesOque = ["🏆 realizando grandes objetivos", "✨ empilhando vitórias", "🥂 celebrando nosso sucesso", "🏔️ desbravando o mundo", "💪 edificando nossa história"];
+        const opcoesComo = ["🔐 blindados e unidos", "❤️ com amor e parceria", "🚀 focados no amanhã", "🤝 como um time imbatível", "👑 liderando nossos planos"];
+        
+        const mensagensEspeciais = [
+            "Não importa o destino, contanto que a gente esteja olhando na mesma direção. 🔗",
+            "Cada clique aqui é só um spoiler do império que estamos levantando juntos. 👑",
+            "Nossos planos são grandes, mas a nossa parceria para realizar é ainda maior. 🚀",
+            "O amanhã não é questão de sorte, é o que estamos construindo todo santo dia! 🔐"
+        ];
+
+        function spinMachine() {
+            const btn = document.querySelector('.spin-button');
+            const slotOnde = document.getElementById('slot-onde');
+            const slotOque = document.getElementById('slot-oque');
+            const slotComo = document.getElementById('slot-como');
+            const msg = document.getElementById('machine-msg');
+            
+            btn.disabled = true;
+            btn.innerText = "Projetando... ⏳";
+            msg.style.opacity = "0.3";
+
+            // Efeito visual de rotação rápida simulada
+            let contador = 0;
+            const intervalo = setInterval(() => {
+                slotOnde.innerText = opcoesOnde[Math.floor(Math.random() * opcoesOnde.length)];
+                slotOque.innerText = opcoesOque[Math.floor(Math.random() * opcoesOque.length)];
+                slotComo.innerText = opcoesComo[Math.floor(Math.random() * opcoesComo.length)];
+                contador++;
+                if(contador > 10) {
+                    clearInterval(intervalo);
+                    
+                    // Resultado Final de Impacto
+                    slotOnde.innerText = opcoesOnde[Math.floor(Math.random() * opcoesOnde.length)];
+                    slotOque.innerText = opcoesOque[Math.floor(Math.random() * opcoesOque.length)];
+                    slotComo.innerText = opcoesComo[Math.floor(Math.random() * opcoesComo.length)];
+                    
+                    // Escolhe uma frase forte de casal para fixar embaixo
+                    msg.innerText = mensagensEspeciais[Math.floor(Math.random() * mensagensEspeciais.length)];
+                    msg.style.opacity = "1";
+                    
+                    btn.disabled = false;
+                    btn.innerText = "Construir Nosso Futuro";
+                }
+            }, 80);
+        }
+    </script>
     </section>
 
     <!-- GALERIA DE FOTOS ATUALIZADA (4 EM PÉ + 1 DEITADA) -->
@@ -137,9 +171,18 @@
 
     <section class="letter-section">
         <div class="letter-card">
-            <h2>Minha Promessa para Você</h2>
-            <p>Ana, olhar para trás e ver tudo o que construímos desde aquele grupo de jovens me enche de gratidão. Você tem 27 anos e a maturidade, a beleza e a doçura de alguém que transforma qualquer ambiente por onde passa.</p>
-            <p>Amo cada detalhe nosso, amo lembrar da nossa declaração na calçada e de como nosso amor amadureceu. Prometo continuar cuidando de você, te apoiando e te amando todos os dias da minha vida.</p>
+           <h2>Nosso Futuro Juntos</h2>
+        
+        <p>
+            Ana, quando eu olho para a frente, a única certeza que eu tenho é que quero construir cada pedaço do meu amanhã ao seu lado. Mais do que tudo o que já vivemos, o que mais me move hoje é a nossa capacidade de olhar na mesma direção, de planejar, sonhar e ter a certeza de que somos um time pronto para vencer.
+        </p>
+
+        <p>
+            Sei que temos objetivos grandes e uma caminhada cheia de conquistas nos esperando. Estar com você significa ter uma parceira de vida que me inspira a ser melhor todos os dias, e o meu maior compromisso é caminhar lado a lado com você, batalhando e celebrando cada vitória nossa. Nós vamos conquistar exatamente tudo o que estamos projetando.
+        </p>
+
+        <p>
+            Minha promessa para você não é sobre o que já ficou para trás, mas sobre o futuro que estamos levantando juntos: estarei aqui para apoiar seus voos, proteger o que temos e edificar uma vida sólida, cheia de amor, respeito e sucesso. O amanhã é nosso, e eu mal posso esperar por ele. ❤️
             <p class="signature">Com todo o meu amor, Fellype Feitoza.</p>
         </div>
     </section>
