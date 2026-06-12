@@ -8,65 +8,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- PLAYER DE MÚSICA ULTRA COMPATÍVEL -->
-    <audio id="background-music" loop preload="auto" crossorigin="anonymous">
-        <source src="./ilove.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
+<audio id="background-music" loop preload="auto">
+        <source src="ILOVE.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
     </audio>
 
-    <!-- Botão Flutuante Discreto -->
-    <div class="music-controls" onclick="forcePlayMusic()">
-        <span id="music-icon">🎵</span>
+    <div class="music-controls" onclick="controlarMusica()" style="position: fixed; bottom: 25px; right: 25px; width: 45px; height: 45px; background: rgba(22, 22, 26, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); transition: all 0.3s ease;">
+        <span id="music-icon" style="font-size: 1.2rem; display: inline-block;">🎵</span>
     </div>
 
     <script>
-        const music = document.getElementById('background-music');
-        const icon = document.getElementById('music-icon');
+        function controlarMusica() {
+            const musica = document.getElementById('background-music');
+            const icone = document.getElementById('music-icon');
+            
+            // Garante o volume máximo ao iniciar
+            musica.volume = 1.0;
 
-        // Garante que o volume está alto
-        music.volume = 1.0;
-
-        function forcePlayMusic() {
-            if (music.paused) {
-                music.play()
+            if (musica.paused) {
+                musica.play()
                     .then(() => {
-                        icon.innerText = "🎵";
-                        icon.style.animation = "pulse 1.5s infinite";
+                        icone.innerText = "🎵";
+                        icone.style.animation = "pulse 1.5s infinite";
                     })
                     .catch((error) => {
                         console.error("Erro ao tocar:", error);
-                        alert("Clique novamente para liberar o som! O navegador bloqueou o início automático.");
+                        alert("Não foi possível carregar o áudio. Verifique se o nome do arquivo no GitHub está exatamente como suamusica.mp3");
                     });
             } else {
-                music.pause();
-                icon.innerText = "🔇";
-                icon.style.animation = "none";
+                musica.pause();
+                icone.innerText = "🔇";
+                icone.style.animation = "none";
             }
-        }
-
-        // Tenta destravar o som em QUALQUER toque que ela der na página
-        function destravarSom() {
-            if (music.paused) {
-                music.play()
-                    .then(() => {
-                        icon.innerText = "🎵";
-                        icon.style.animation = "pulse 1.5s infinite";
-                        // Remove os ouvintes para não ficar tentando tocar toda hora
-                        removerOuvintes();
-                    })
-                    .catch(err => console.log("Aguardando interação real..."));
-            }
-        }
-
-        // Adiciona múltiplos gatilhos de toque para garantir que o celular capture o clique
-        document.addEventListener('click', destravarSom);
-        document.addEventListener('touchstart', destravarSom);
-        document.addEventListener('scroll', destravarSom);
-
-        function removerOuvintes() {
-            document.removeEventListener('click', destravarSom);
-            document.removeEventListener('touchstart', destravarSom);
-            document.removeEventListener('scroll', destravarSom);
         }
     </script>
     </script>
