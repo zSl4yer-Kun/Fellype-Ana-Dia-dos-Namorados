@@ -369,3 +369,48 @@ body {
     
     .counter-box { min-width: 45%; }
 }
+/* ============================================================
+   ESTRUTURA DA SEÇÃO DE VÍDEOS (YOUTUBE RESPONSIVO)
+   ============================================================ */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dois vídeos lado a lado no computador */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.video-item {
+    background: rgba(22, 22, 26, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    padding: 10px;
+}
+
+/* Força o player do YouTube a manter a proporção de cinema */
+.video-item iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    border-radius: 10px;
+    display: block;
+    border: none;
+}
+
+.video-caption {
+    text-align: center;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: #d4af37;
+    font-weight: 500;
+}
+
+/* Ajuste para telas de celular */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr; /* Um vídeo embaixo do outro no celular */
+        gap: 1.5rem;
+    }
+}
